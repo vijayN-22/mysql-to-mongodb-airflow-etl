@@ -1,7 +1,17 @@
 import mysql.connector
 
-def extract_users():
-    print("Starting MySQL data extraction...")
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="22jan1998",
+  database="LIC"
+)
+mycursor = mydb.cursor()
+def extract_data():
+    mycursor.execute("SELECT * FROM pmo02000")
+    data = mycursor.fetchall()
+    for row in data:
+        print(row)
 
 if __name__ == "__main__":
-    extract_users()
+    extract_data()
