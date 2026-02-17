@@ -1,0 +1,5 @@
+mysql :
+  host: "localhost"
+  user: "root"
+  password: "22jan1998"
+  database: "LIC"
