@@ -1,5 +1,7 @@
 import mysql.connector
 import yaml
+from src.transform.transform import transform
+from src.load.load_mongo import load_mongo
 
 def load_config():
   with open("config/mysql.yaml", "r") as file:
@@ -20,12 +22,11 @@ def extract_data():
    cursor = mycursor.cursor(dictionary=True)
    cursor.execute("SELECT * FROM pmo02000")
    data = cursor.fetchall()
-   cursor.close()
    mycursor.close()
    return data
 
 if __name__ == "__main__":
     data = extract_data()
-    print(f"Extracted {len(data)} records")
-data = extract_data()
-print(f"Extracted {len(data)} records")
+    transformed_data = transform(data)
+    load_mongo(transformed_data)
+    # print(data)
