@@ -14,17 +14,31 @@ def normalize_types(record):
     return record
 
 def transform(data):
-    transformed_data = []
+    grouped = {}
+
     for row in data:
         row = normalize_types(row)
-        print(f"Processing row: {row}")
-        transformed_row = {
-            "policyNo": row.get("policy_number"),
-            "owningLocation": row.get("owning_location"),
-            "policyType": row.get("policy_type"),
-            "issueDate": row.get("issue_date"),
-            "maturityDate": row.get("maturity_date"),
-            "sumAssured": row.get("sum_assured"),
+
+        key = (row["policy_number"], row["owning_location"])
+
+        if key not in grouped:
+            grouped[key] = {
+                "policyNo": row.get("policy_number"),
+                "owningLocation": row.get("owning_location"),
+                "policyType": row.get("policy_type"),
+                "issueDate": row.get("issue_date"),
+                "maturityDate": row.get("maturity_date"),
+                "sumAssured": row.get("sum_assured"),
+                "nominees": []
+            }
+
+        nominee = {
+            "nomineeName": row.get("nominee_name"),
+            "relationship": row.get("relationship"),
+            "age": row.get("nominee_age"),
+            "keyTail": row.get("key_tail")
         }
-        transformed_data.append(transformed_row)
-    return transformed_data
+
+        grouped[key]["nominees"].append(nominee)
+
+    return list(grouped.values())
