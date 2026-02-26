@@ -29,16 +29,35 @@ def transform(data):
                 "issueDate": row.get("issue_date"),
                 "maturityDate": row.get("maturity_date"),
                 "sumAssured": row.get("sum_assured"),
-                "nominees": []
+                "nomineeDetails": [],
+                "riderDetails": [],
+                "neftDetails": None,
+                "annuityDetails": {
+                    "annuityFrequency": row.get("annuity_frequency"),
+                    "annuityType": row.get("annuity_type"),
+                    "annuityAmount": row.get("annuity_amount")
+                },
+                "neftDetails": {
+                    "bankName": row.get("bank_name"),
+                    "accountNumber": row.get("account_number"),
+                    "ifscCode": row.get("ifsc_code"),
+                    "accountHolderName": row.get("account_holder_name")
+                }
             }
-
         nominee = {
             "nomineeName": row.get("nominee_name"),
             "relationship": row.get("relationship"),
             "age": row.get("nominee_age"),
             "keyTail": row.get("key_tail")
         }
-
-        grouped[key]["nominees"].append(nominee)
+        rider = {
+            "riderKeyTail": row.get("rider_key_tail"),
+            "riderType": row.get("rider_type"),
+            "riderSumAssured": row.get("rider_sum_assured"),
+            "riderPremium": row.get("rider_premium")
+        }
+        grouped[key]["nomineeDetails"].append(nominee)
+        grouped[key]["riderDetails"].append(rider)
 
     return list(grouped.values())
+print("Done")

@@ -22,7 +22,11 @@ def extract_data():
    cursor = mycursor.cursor(dictionary=True)
    cursor.execute("SELECT * FROM pmo02000 po left join pmc03000 p3 " \
    "on po.policy_number = p3.policy_number and po.owning_location = p3.owning_location " \
-   "left join pmc04000 p4 on po.policy_number = p4.policy_number and po.owning_location = p4.owning_location")
+   "left join pmc04000 p4 on po.policy_number = p4.policy_number and po.owning_location = p4.owning_location" \
+   " left join pmc05000 p5 on po.policy_number = p5.policy_number and po.owning_location = p5.owning_location" \
+   " left join pmc06000 p6 on po.policy_number = p6.policy_number and po.owning_location = p6.owning_location" \
+   " left join pmc07000 p7 on po.policy_number = p7.policy_number and po.owning_location = p7.owning_location" \
+   )
    data = cursor.fetchall()
    mycursor.close()
   #  print(data)
@@ -32,4 +36,4 @@ if __name__ == "__main__":
     data = extract_data()
     transformed_data = transform(data)
     load_mongo(transformed_data)
-#     # print(data)
+    # print(data)
