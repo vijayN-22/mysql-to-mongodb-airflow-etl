@@ -1,15 +1,14 @@
 from pymongo import UpdateOne
 from pymongo.errors import PyMongoError
 import pymongo
-
+from src.utils.logger import get_logger
+logger = get_logger(__name__)
 
 BATCH_SIZE = 10
-
-
 def load_mongo(data):
 
     if not data:
-        print("No data to load")
+        logger.info("No data to load")
         return
 
     client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -41,14 +40,14 @@ def load_mongo(data):
 
             result = collection.bulk_write(operations, ordered=False)
 
-            print(
+            logger.info(
                 f"Batch {i//BATCH_SIZE + 1}: "
                 f"Inserted={result.upserted_count}, "
                 f"Updated={result.modified_count}"
             )
 
     except PyMongoError as e:
-        print(f"MongoDB error: {type(e).__name__}")
+        logger.error(f"MongoDB error: {type(e).__name__}")
         raise
 
     finally:

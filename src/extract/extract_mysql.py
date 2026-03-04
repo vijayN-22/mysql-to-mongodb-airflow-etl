@@ -20,12 +20,33 @@ def get_connection():
 def extract_data():
    mycursor = get_connection()
    cursor = mycursor.cursor(dictionary=True)
-   cursor.execute("SELECT * FROM pmo02000 po left join pmc03000 p3 " \
+   cursor.execute("SELECT po.policy_number as policyNo," \
+   " po.owning_location as owningLocation," \
+   " po.policy_type as policyType," \
+   " po.issue_date as issueDate," \
+   " po.maturity_date as maturityDate," \
+   " po.sum_assured as sumAssured," \
+   " p4.nominee_name as nomineeName," \
+   " p4.relationship as relationship," \
+   " p4.nominee_age as nomineeAge," \
+   " p4.key_tail as nkeyTail," \
+   " p5.key_tail as rkeyTail," \
+   " p5.rider_type as riderType," \
+   " p5.rider_sum_assured as riderSumAssured," \
+   " p5.rider_premium as riderPremium," \
+    " p6.annuity_frequency as annuityFrequency," \
+    " p6.annuity_type as annuityType," \
+    " p6.annuity_amount as annuityAmount," \
+   " p7.bank_name as bankName," \
+   " p7.account_number as accountNumber," \
+   " p7.ifsc_code as ifscCode," \
+   " p7.account_holder_name as accountHolderName" \
+   " FROM pmo02000 po left join pmc03000 p3 " \
    "on po.policy_number = p3.policy_number and po.owning_location = p3.owning_location " \
    "left join pmc04000 p4 on po.policy_number = p4.policy_number and po.owning_location = p4.owning_location" \
    " left join pmc05000 p5 on po.policy_number = p5.policy_number and po.owning_location = p5.owning_location" \
    " left join pmc06000 p6 on po.policy_number = p6.policy_number and po.owning_location = p6.owning_location" \
-   " left join pmc07000 p7 on po.policy_number = p7.policy_number and po.owning_location = p7.owning_location" \
+   " left join pmc07000 p7 on po.policy_number = p7.policy_number and po.owning_location = p7.owning_location"
    )
    data = cursor.fetchall()
    mycursor.close()

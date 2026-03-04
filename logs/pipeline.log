@@ -1,0 +1,23 @@
+2026-02-26 21:29:33,117 | INFO | src.load.load_mongo | Batch 1: Inserted=0, Updated=0
+2026-02-26 21:29:33,119 | INFO | src.load.load_mongo | Batch 2: Inserted=0, Updated=0
+2026-02-26 21:29:33,120 | INFO | src.load.load_mongo | Batch 3: Inserted=0, Updated=0
+2026-02-26 21:31:23,051 | INFO | src.load.load_mongo | Batch 1: Inserted=10, Updated=0
+2026-02-26 21:31:23,054 | INFO | src.load.load_mongo | Batch 2: Inserted=10, Updated=0
+2026-02-26 21:31:23,055 | INFO | src.load.load_mongo | Batch 3: Inserted=10, Updated=0
+2026-02-26 21:43:30,231 | INFO | src.load.load_mongo | Batch 1: Inserted=10, Updated=0
+2026-02-26 21:43:30,233 | INFO | src.load.load_mongo | Batch 2: Inserted=10, Updated=0
+2026-02-26 21:43:30,234 | INFO | src.load.load_mongo | Batch 3: Inserted=10, Updated=0
+2026-03-04 01:20:04,985 | INFO | src.load.load_mongo | Batch 1: Inserted=0, Updated=0
+2026-03-04 01:20:04,987 | INFO | src.load.load_mongo | Batch 2: Inserted=0, Updated=0
+2026-03-04 01:20:04,989 | INFO | src.load.load_mongo | Batch 3: Inserted=0, Updated=0
+2026-03-04 02:49:35,251 | INFO | src.load.load_mongo | Batch 1: Inserted=1, Updated=0
+2026-03-04 03:51:36,856 | INFO | src.load.load_mongo | Batch 1: Inserted=1, Updated=0
+2026-03-04 03:52:19,290 | ERROR | src.load.load_mongo | MongoDB error: BulkWriteError
+2026-03-04 03:52:38,550 | ERROR | src.load.load_mongo | MongoDB error: BulkWriteError
+2026-03-04 03:53:14,496 | ERROR | src.load.load_mongo | MongoDB error: BulkWriteError
+2026-03-04 03:54:16,471 | INFO | src.load.load_mongo | Batch 1: Inserted=9, Updated=0
+2026-03-04 03:54:16,476 | INFO | src.load.load_mongo | Batch 2: Inserted=10, Updated=0
+2026-03-04 03:54:16,479 | INFO | src.load.load_mongo | Batch 3: Inserted=10, Updated=0
+2026-03-04 04:08:35,538 | INFO | src.load.load_mongo | Batch 1: Inserted=10, Updated=0
+2026-03-04 04:08:35,540 | INFO | src.load.load_mongo | Batch 2: Inserted=10, Updated=0
+2026-03-04 04:08:35,543 | INFO | src.load.load_mongo | Batch 3: Inserted=10, Updated=0

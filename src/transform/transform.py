@@ -19,42 +19,42 @@ def transform(data):
     for row in data:
         row = normalize_types(row)
 
-        key = (row["policy_number"], row["owning_location"])
+        key = (row["policyNo"], row["owningLocation"])
 
         if key not in grouped:
             grouped[key] = {
-                "policyNo": row.get("policy_number"),
-                "owningLocation": row.get("owning_location"),
-                "policyType": row.get("policy_type"),
-                "issueDate": row.get("issue_date"),
-                "maturityDate": row.get("maturity_date"),
-                "sumAssured": row.get("sum_assured"),
+                "policyNo": row.get("policyNo"),
+                "owningLocation": row.get("owningLocation"),
+                "policyType": row.get("policyType"),
+                "issueDate": row.get("issueDate"),
+                "maturityDate": row.get("maturityDate"),
+                "sumAssured": row.get("sumAssured"),
                 "nomineeDetails": [],
                 "riderDetails": [],
                 "neftDetails": None,
                 "annuityDetails": {
-                    "annuityFrequency": row.get("annuity_frequency"),
-                    "annuityType": row.get("annuity_type"),
-                    "annuityAmount": row.get("annuity_amount")
+                    "annuityFrequency": row.get("annuityFrequency"),
+                    "annuityType": row.get("annuityType"),
+                    "annuityAmount": row.get("annuityAmount")
                 },
                 "neftDetails": {
-                    "bankName": row.get("bank_name"),
-                    "accountNumber": row.get("account_number"),
-                    "ifscCode": row.get("ifsc_code"),
-                    "accountHolderName": row.get("account_holder_name")
+                    "bankName": row.get("bankName"),
+                    "accountNumber": row.get("accountNumber"),
+                    "ifscCode": row.get("ifscCode"),
+                    "accountHolderName": row.get("accountHolderName")
                 }
             }
         nominee = {
-            "nomineeName": row.get("nominee_name"),
+            "nomineeName": row.get("nomineeName"),
             "relationship": row.get("relationship"),
-            "age": row.get("nominee_age"),
-            "keyTail": row.get("key_tail")
+            "age": row.get("nomineeAge"),
+            "keyTail": row.get("nkeyTail")
         }
         rider = {
-            "riderKeyTail": row.get("rider_key_tail"),
-            "riderType": row.get("rider_type"),
-            "riderSumAssured": row.get("rider_sum_assured"),
-            "riderPremium": row.get("rider_premium")
+            "riderKeyTail": row.get("rkeyTail"),
+            "riderType": row.get("riderType"),
+            "riderSumAssured": row.get("riderSumAssured"),
+            "riderPremium": row.get("riderPremium")
         }
         grouped[key]["nomineeDetails"].append(nominee)
         grouped[key]["riderDetails"].append(rider)
