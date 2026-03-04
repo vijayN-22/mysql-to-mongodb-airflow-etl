@@ -4,7 +4,7 @@ import pymongo
 from src.utils.logger import get_logger
 logger = get_logger(__name__)
 
-BATCH_SIZE = 10
+BATCH_SIZE = 10000
 def load_mongo(data):
 
     if not data:

@@ -1,1 +1,2 @@
 config/mysql.yaml
+log/pipelines.log

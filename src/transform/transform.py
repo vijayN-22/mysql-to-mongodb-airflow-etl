@@ -31,7 +31,6 @@ def transform(data):
                 "sumAssured": row.get("sumAssured"),
                 "nomineeDetails": [],
                 "riderDetails": [],
-                "neftDetails": None,
                 "annuityDetails": {
                     "annuityFrequency": row.get("annuityFrequency"),
                     "annuityType": row.get("annuityType"),
@@ -42,22 +41,43 @@ def transform(data):
                     "accountNumber": row.get("accountNumber"),
                     "ifscCode": row.get("ifscCode"),
                     "accountHolderName": row.get("accountHolderName")
-                }
+                },
+                "_seen_nominee": set(),
+                "_seen_rider": set()
             }
-        nominee = {
-            "nomineeName": row.get("nomineeName"),
-            "relationship": row.get("relationship"),
-            "age": row.get("nomineeAge"),
-            "keyTail": row.get("nkeyTail")
-        }
-        rider = {
-            "riderKeyTail": row.get("rkeyTail"),
-            "riderType": row.get("riderType"),
-            "riderSumAssured": row.get("riderSumAssured"),
-            "riderPremium": row.get("riderPremium")
-        }
-        grouped[key]["nomineeDetails"].append(nominee)
-        grouped[key]["riderDetails"].append(rider)
 
-    return list(grouped.values())
+        # Nominee
+        nkey = row.get("nkeyTail")
+        if nkey and nkey not in grouped[key]["_seen_nominee"]:
+            nominee = {
+                "nomineeName": row.get("nomineeName"),
+                "relationship": row.get("relationship"),
+                "age": row.get("nomineeAge"),
+                "keyTail": nkey
+            }
+
+            grouped[key]["nomineeDetails"].append(nominee)
+            grouped[key]["_seen_nominee"].add(nkey)
+
+        # Rider
+        rkey = row.get("rkeyTail")
+        if rkey and rkey not in grouped[key]["_seen_rider"]:
+            rider = {
+                "riderKeyTail": rkey,
+                "riderType": row.get("riderType"),
+                "riderSumAssured": row.get("riderSumAssured"),
+                "riderPremium": row.get("riderPremium")
+            }
+
+            grouped[key]["riderDetails"].append(rider)
+            grouped[key]["_seen_rider"].add(rkey)
+
+    # Remove helper fields
+    result = []
+    for v in grouped.values():
+        del v["_seen_nominee"]
+        del v["_seen_rider"]
+        result.append(v)
+
+    return result
 print("Done")
