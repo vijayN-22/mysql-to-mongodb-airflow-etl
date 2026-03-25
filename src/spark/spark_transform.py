@@ -123,12 +123,43 @@ def transform(df):
         ).alias("riderDetails")
     )
 
+    transformed_df = transformed_df \
+        .withColumn(
+            "neftDetails",
+            struct(
+                col("bankName"),
+                col("accountNumber"),
+                col("ifscCode"),
+                col("accountHolderName")
+            )
+        ) \
+        .withColumn(
+            "annuityDetails",
+            struct(
+                col("annuityFrequency"),
+                col("annuityType"),
+                col("annuityAmount")
+            )
+        ) \
+        .drop(
+            "bankName",
+            "accountNumber",
+            "ifscCode",
+            "accountHolderName",
+            "annuityFrequency",
+            "annuityType",
+            "annuityAmount"
+        )
+
     return transformed_df
 
 def write_to_mongo(df):
 
     df.write \
       .format("mongodb") \
+      .option("operationType", "update") \
+      .option("upsertDocument", "true") \
+      .option("idFieldList", "policyNo,owningLocation") \
       .mode("append") \
       .save()
     
@@ -141,5 +172,4 @@ if __name__ == "__main__":
     transformed_df = transform(df)
 
     write_to_mongo(transformed_df)
-    input("Press Enter to stop Spark...")
     spark.stop()
