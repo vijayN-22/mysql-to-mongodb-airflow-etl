@@ -1,0 +1,12 @@
+mysql:
+  host: localhost
+  port: 3306
+  database: LIC
+  user: root
+  password: 22jan1998
+
+mongo:
+  host: localhost
+  port: 27017
+  database: policy
+  collection: policyMaster

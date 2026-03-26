@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, collect_set, struct
 
 
-from config.config_loader import load_config
+from src.config.config_loader import load_config
 
 
 def create_spark_session():
@@ -24,7 +24,7 @@ def create_spark_session():
         .master("local[*]") \
         .appName("PolicyMigration") \
         .config("spark.jars.packages",
-                "org.mongodb.spark:mongo-spark-connector_2.12:10.3.0,"
+                "org.mongodb.spark:mongo-spark-connector_2.13:10.3.0,"
                 "mysql:mysql-connector-java:8.0.33") \
         .config("spark.mongodb.write.connection.uri", connection_uri) \
         .config("spark.mongodb.write.database", mongo_conf["database"]) \
@@ -173,3 +173,4 @@ if __name__ == "__main__":
 
     write_to_mongo(transformed_df)
     spark.stop()
+    print("Spark session stopped.")
